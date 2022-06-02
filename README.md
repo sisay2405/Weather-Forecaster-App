@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+### ![Figma](https://user-images.githubusercontent.com/82465149/171688172-a95ef2bb-d6bc-4555-8ff0-ab8ade73fa4b.png)
+
+### https://trello.com/b/Rl4VFwzy/weather-app
+
+ # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
