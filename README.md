@@ -3,11 +3,6 @@
 ### https://www.figma.com/proto/WxAfXVgRKDtYACdpI3L0HM/Untitled?node-id=3%3A39&scaling=min-zoom&page-id=0%3A1\
 
 ### https://trello.com/b/Rl4VFwzy/weather-app
-// google Api key AIzaSyA6K1CBwwnSqqkHrknPN6eX7E5NMv1MHEo
-// 1 455326207f5d4f89886b9b4ce1c94a08Master API Key Weather
-// 2  AIzaSyCG74BK2mskbEnDk47B765GzEAzaYYDpSA  API key
-// https://api.weatherbit.io/v2.0/forecast/daily?lat=30.3321838&lon=-81.655651&units=I&days=7&key=455326207f5d4f89886b9b4ce1c94a08
-
 
  # Getting Started with Create React App
 
