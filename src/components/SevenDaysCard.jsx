@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const EachDayWrapper = styled.div`
   margin: 12px 5px;
@@ -14,20 +14,23 @@ const EachDayWrapper = styled.div`
     font-weight: 700;
   }
 `;
-function SevenDaysCard({ dayy }) {
+// eslint-disable-next-line max-len
+function SevenDaysCard({ selectedDay, setSelectedDay, isSelected, selectDay, dayy, date, temp, high, low }) {
   // console.log(dayy);
   const navigate = useNavigate();
   const displayHotel = (e) => {
     navigate(`/EachDay/${dayy.id}`);
+    setSelectedDay(dayy);
   };
+
   return (
-    <EachDayWrapper onClick={displayHotel}>
+    <EachDayWrapper isSelected={isSelected} onClick={selectDay}>
       <div className="ValidDate">
-        <strong>{moment(dayy.valid_date).format('dddd DD MMMM')}</strong>
+        <strong>{date}</strong>
       </div>
       <p>
         <strong>
-          {dayy.temp}
+          {temp}
           <sup>o</sup>
         </strong>
       </p>
@@ -37,15 +40,22 @@ function SevenDaysCard({ dayy }) {
         <strong>Description</strong>:{dayy.weather.description}
       </p> */}
       <p>
-        <strong>High</strong>:{dayy.high_temp}
+        <strong>High</strong>:{high}
       </p>
       <p>
-        <strong>Low</strong>:{dayy.low_temp}
+        <strong>Low</strong>:{low}
       </p>
       <p>
-        <strong>precip</strong>:{dayy.precip}%
+        {/* <strong>precip</strong>:{precip}% */}
       </p>
     </EachDayWrapper>
   );
 }
+SevenDaysCard.propTypes = {
+  date: PropTypes.string.isRequired,
+  temp: PropTypes.number.isRequired,
+  high: PropTypes.number.isRequired,
+  low: PropTypes.number.isRequired,
+  // precip: PropTypes.number.isRequired,
+};
 export default SevenDaysCard;

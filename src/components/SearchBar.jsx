@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import getLocation from '../utils/API';
 
 const SearchBarWrapper = styled.header`
   display:block;
@@ -19,12 +21,27 @@ const SearchBarWrapper = styled.header`
   input:hover {
     border-color: red;
   }
+  button:disabled{
+    background: #00BFFF;  //DeepSkyBlue
+    color:white;
+    margin: 8px 0;
+  }
+  button:enabled {
+    color:white;
+    background: #8FBC8F; //DarkSeaGreen
+    padding-top: 10px;
+    margin: 8px 0;
+  }
   button {
     border-radius: 25px;
   }
 `;
 
 const SearchBar = ({ getData, locations, setLocations }) => {
+  // const [isDisabled, setIsDisabled] = useState(false);
+  // const [buttonColor, setButtonColor] = useState('red');
+  // const newButtonColor = buttonColor === '#00B5E2' ? 'green' : '#00B5E2';
+
   const onSubmit = (e) => {
     e.preventDefault();
     getData();
@@ -44,17 +61,29 @@ const SearchBar = ({ getData, locations, setLocations }) => {
             className="searchHotelinput"
             type="text"
             autoComplete="true"
-            required
-            placeholder="Atlantic blvd or 32219 or Jacksonville Fl."
+            // required
+            placeholder="Atlantic 32219 or Jacksonville Fl."
             value={locations}
             onChange={(e) => setLocations(e.target.value)}
           />
-          <button className="searchHotelButton" type="submit">
+          <button
+            className="searchHotelButton"
+            type="submit"
+            // style={{
+            //   color: 'white',
+            //   backgroundColor: isDisabled ? 'red' : buttonColor,
+            // }}
+            // onClick={() => setButtonColor(newButtonColor)}
+            disabled={!locations}
+          >
             Search
           </button>
         </div>
       </form>
     </SearchBarWrapper>
   );
+};
+SearchBar.propTypes = {
+  getData: PropTypes.func.isRequired,
 };
 export default SearchBar;

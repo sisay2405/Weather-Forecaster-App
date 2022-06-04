@@ -49,9 +49,3 @@ ErrorBoundary.propTypes = {
 };
 
 export default ErrorBoundary;
-
-// # Error boundaries work like a JavaScript catch {} block, but for components. Only class-based (smart) components can be error boundaries. In practice, most of the time you’ll want to declare an error boundary component once and use it throughout your application, or you may create separate error boundary components to wrap around particular, exception-prone sections of your app. Error boundaries do NOT catch errors for any of the following:
-// - Event handlers (error boundaries run only on render; click events don't run then... use try/catch if needed)
-// - Asynchronous code (setTimeouts)
-// - Server side rendering
-// - Errors thrown within the error boundary itself

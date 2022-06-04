@@ -2,9 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterWrapper = styled.footer`
-  // position: fixed;
-  // top: 530px;
-  // width: 100%;
   background-color: #00b5e2;
   padding: 0.7rem 1.5rem;
   h4 {
