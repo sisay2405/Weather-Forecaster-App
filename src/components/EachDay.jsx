@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router';
+// import { useParams, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import { lighten } from '../utils/StyleMethods';
+import mainLogo from '../Img/row8.png';
+import './Subscribe.css';
 
 const EachDayWrapper = styled.header`
-  margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  text-align: center;
-  box-shadow: 5px 5px #00b5e2;
 
-  .referesh {
-    color: #00b5e2;
-  }
-  .dayList {
-    font-family: cursive;
-    font:12px;
-    margin: 1px;
-  }
-  .dayListTitle{
-    font:60px;
-  }
 `;
 const SpinnerLoader = styled.div`
   margin-top: 400px;
@@ -52,21 +39,18 @@ const SpinnerLoader = styled.div`
 
 // eslint-disable-next-line max-len
 const EachDay = ({ date, temp, lowTemp, img, description, highTemp, feelhighTemp, feellowTemp, precip, relativeHumidity, windSpeed, windDirection }) => {
-  const [details, setDetails] = useState({});
+  const [homepage, setHomepage] = useState({});
   const [loading, setLoading] = useState(true);
-  const { ts } = useParams();
-  // const { date, low_temp: lowtemp } = details;
-  const navigate = useNavigate(); // //navigate to different page with Router useNavigate
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, []);
+  useEffect(() => {
+    setHomepage(false);
+  }, []);
 
-  // const HomePage = () => {
-  //   navigate('/');
-  // };
   const startAgainButton = () => {
     window.location.reload(false);
   };
@@ -77,36 +61,55 @@ const EachDay = ({ date, temp, lowTemp, img, description, highTemp, feelhighTemp
           <div className="spin"> </div>
         </SpinnerLoader>
       ) : (
-        <EachDayWrapper>
-          <RefreshIcon
-            className="referesh"
-            onClick={startAgainButton}
-          />
-          <h3 className="dayListTitle">Forcast Details for {date}</h3>
-          <h1 className="dayListTitle">
-            {temp}
-            <sup>o</sup>
-          </h1>
-          <img
-            className="dddd"
-            src={`https://www.weatherbit.io/static/img/icons/${img}.png`}
-            alt="https://www.weatherbit.io/static/img/icons/r01d.png"
-          />
-          <p className="dayList">{description}</p>
-          <p className="dayList">
-            <strong>High</strong>:
-            {highTemp}<sup>o</sup>|<strong>Feels like:</strong>{feelhighTemp}<sup>o</sup>
-          </p>
-          <p className="dayList"> <strong>low</strong>:
-            {lowTemp}<sup>o</sup>| <strong>Feels like:</strong>{feellowTemp}<sup>o</sup>
-          </p>
-          <p className="dayList">High:-| feelslike: </p>
-          <p className="dayList">
-            <strong>likelhood of Precipitation:</strong>
-            {precip}<sup>o</sup>|<strong> Relative Humidty</strong> {relativeHumidity}<sup>o</sup>
-          </p>
-          <p className="dayList">Wind Speed:{windSpeed}| <strong>Wind Direction:</strong>{windDirection}</p>
+        <EachDayWrapper>{(!homepage) ? (
+          <div>
+            <RefreshIcon
+              className="referesh"
+              onClick={startAgainButton}
+            />
+            <h3 className="dayListTitle">Forcast Details for {date}</h3>
+            <section className="profile">
+              <section>
+                <img
+                  src={`https://www.weatherbit.io/static/img/icons/${img}.png`}
+                  alt="highTemp"
+                />
+                <h1 className="dayListTitle">
+                  <strong>{temp}</strong>
+                  <sup>o</sup>
+                </h1>
+                <p className="dayList"><strong>{description}</strong></p>
+              </section>
+
+              <section>
+                <p className="dayList">
+                  <strong>High</strong>:
+                  {highTemp}<sup>o</sup>|<strong>Feels like:</strong>{feelhighTemp}<sup>o</sup>
+                </p>
+                <p className="dayList"> <strong>low</strong>:
+                  {lowTemp}<sup>o</sup>| <strong>Feels like:</strong>{feellowTemp}<sup>o</sup>
+                </p>
+                <p className="dayList">
+                  <strong>likelhood of Precipitation:</strong>
+                  {precip}<sup>o</sup>|
+                  <strong> Relative Humidty  </strong> {relativeHumidity}<sup>o</sup>
+                </p>
+                <p className="dayList">Wind Speed:{windSpeed}| <strong>Wind Direction:</strong>{windDirection}</p>
+              </section>
+            </section>
+            <button
+              variant="primary"
+              type="button"
+              onClick={() => {
+                setHomepage(true);
+                onreset(null);
+              }}
+            >home Page
+            </button>
+          </div>
+        ) : ''}
         </EachDayWrapper>
+
       )}
     </>
   );

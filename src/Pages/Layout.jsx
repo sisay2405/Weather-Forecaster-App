@@ -1,44 +1,36 @@
-import React from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
+import React, { useState, useEffect, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import GlobalStyle from '../globalStyle';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import GlobalStyle from '../GlobalStyle';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import ThemeContext from '../utils/ThemeContext';
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  main {
-    flex: 1;
-    margin: 0 auto 1.5rem;
-    padding: 0 1.5rem 1rem;
-    width: 90%;
-    & > div {
-      white-space: pre-line;
-    }
-    a:visited {
-      color: blue;
-    }
-    h2 {
-      color: #009900;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-    }
-  }
-}
 `;
 
 const Layout = () => {
+  const [theme, setTheme] = useState('weather');
+  useEffect(() => {
+    document.title = `${
+      theme[0].toUpperCase() + theme.slice(1)
+    } App`;
+  });
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'weather' ? 'seven-days-Weather' : 'weather'));
+  };
+
   return (
     <>
-      <GlobalStyle />
-      <Wrapper>
-        <Header />
-        <Outlet />
-        <Footer />
-      </Wrapper>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <GlobalStyle />
+        <Wrapper>
+          <Header />
+          <Outlet />
+          <Footer />
+        </Wrapper>
+      </ThemeContext.Provider>
     </>
   );
 };

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { Row, Col } from 'reactstrap';
+import ReactAnimatedWeather from 'react-animated-weather';
+import PropTypes from 'prop-types';
 import SevenDaysCard from './SevenDaysCard';
 import SearchBar from './SearchBar';
-import getLocation from '../utils/API';
+import GetLocation from '../utils/API';
 import EachDay from './EachDay';
+// import UserContext from '../utils/UserContext';
 
 const HomeWrapper = styled.div`
   text-align: center;
@@ -25,13 +27,22 @@ const DayWrapper = styled.div`
   justify-content: center;
 `;
 const Home = () => {
-  const [details, setDetails] = useState({});
-  const [sevenDays, setSevenDays] = useState([]);
-  const [locations, setLocations] = useState('Jacksonville, FL');
-  const [oneDay, setOneDay] = useState(null);
-  const { city_name: cityName, state_code: stateCode } = details;
+  const defaults = {
+    icon: 'CLOUDY',
+    color: 'goldenrod',
+    size: 72,
+    animate: true
+  };
+
+  const [locations, setLocations] = useState();
+  const [user, setUser] = useState({
+    locations: '',
+    sevenDays: [],
+    oneDay: '',
+  });
+  const { sevenDays, oneDay } = user;
   const getData = () => {
-    getLocation(locations)
+    GetLocation(locations)
       .then((res) => {
         const { lat } = res.data[0];
         const { lon } = res.data[0];
@@ -41,9 +52,10 @@ const Home = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            setDetails(data);
-            setOneDay(null);
-            setSevenDays(data.data);
+            setUser({
+              oneDay: null,
+              sevenDays: data.data,
+            });
           })
           .catch((error) => console.log(error));
       })
@@ -52,28 +64,38 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
+  // const inputChange = (e) => {
+  //   const { locations, value } = e.target;
+  //   setUser({ ...user, [locations]: value });
+  // };
   return (
     <HomeWrapper>
+      {/* <UserContext.Provider value={user}> */}
       <SearchBar
         getData={getData}
+          // inputChange={inputChange}
         locations={locations}
         setLocations={setLocations}
       />
-      <div className="cityName"> {cityName} {stateCode}</div>
+      {/* </UserContext.Provider> */}
+      {/* <ReactAnimatedWeather
+        icon={defaults.icon}
+        color={defaults.color}
+        size={defaults.size}
+        animate={defaults.animate}
+      /> */}
       <DayWrapper style={{ display: !oneDay ? 'flex' : 'none' }}>
-        {sevenDays?.map((dayy) => (
-          <div>
-            <SevenDaysCard
-              key={dayy}
-              dayy={dayy}
-              temp={dayy.temp}
-              high={dayy.high_temp}
-              low={dayy.low_temp}
-              precip={dayy.precip}
-              date={moment(dayy.valid_date).format('dddd DD MMMM')}
-              selectDay={() => setOneDay(dayy)}
-            />
-          </div>
+        {sevenDays?.map((dayy, i) => (
+          <SevenDaysCard
+            key={dayy.ts}
+            dayy={dayy}
+            temp={dayy.temp}
+            high={dayy.high_temp}
+            low={dayy.low_temp}
+            precip={dayy.precip}
+            date={moment(dayy.valid_date).format('dddd')}
+            selectDay={() => setUser({ ...user, oneDay: dayy })}
+          />
         ))}
       </DayWrapper>
       <div>
@@ -92,13 +114,25 @@ const Home = () => {
               relativeHumidity={oneDay.rh}
               windSpeed={oneDay.wind_spd}
               windDirection={oneDay.wind_cdir_full}
-
             />
           </>
         ) }
       </div>
     </HomeWrapper>
   );
+};
+ReactAnimatedWeather.defaultProps = {
+  animate: true,
+  size: 64,
+  color: 'black'
+};
+ReactAnimatedWeather.propTypes = {
+  icon: PropTypes.oneOf([
+    'CLOUDY',
+  ]).isRequired,
+  animate: PropTypes.bool,
+  size: PropTypes.number,
+  color: PropTypes.string
 };
 
 export default Home;

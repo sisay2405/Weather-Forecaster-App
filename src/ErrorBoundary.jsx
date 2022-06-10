@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 // # Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in component constructors full the whole tree below them.
 class ErrorBoundary extends Component {
@@ -29,12 +29,8 @@ class ErrorBoundary extends Component {
       return (
         <>
           <Header />
-          <h1>An error has occurred in a child component!</h1>
-          <p>
-            (Your error boundary should typically include a way for the user to
-            get back on track: at the very least a link to the home page of your
-            app, or more often fully functional header/footer components.)
-          </p>
+          <h1>An error has occurred in a child component:</h1>
+          {error.message && <p>{error.message}</p>}
           <Footer />
         </>
       );
