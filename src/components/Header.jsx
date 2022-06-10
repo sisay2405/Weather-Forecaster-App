@@ -1,22 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const HeaderWrapper = styled.header` 
-  background-color: #00B5E2;
-  padding: 0.7rem 1.5rem ;
-h2{
-  font-family: cursive;
-  color: #fefe;
-  margin:0.5px;
-  text-align:center;
-}
-`;
+import React, { useContext } from 'react';
+import ThemeContext from '../utils/ThemeContext';
 
 const Header = () => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <HeaderWrapper>
-      <h2> Weather Forcaster App</h2>
-    </HeaderWrapper>
+    <header className={`header ${theme === 'seven-days-Weather' ? 'header--seven-days-Weather-mode' : ''}`}>
+      <h1>
+        {theme[0].toUpperCase() + theme.slice(1)} Forcaster App
+      </h1>
+    </header>
   );
 };
 export default Header;

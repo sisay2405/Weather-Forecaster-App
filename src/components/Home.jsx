@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
+import ReactAnimatedWeather from 'react-animated-weather';
+import PropTypes from 'prop-types';
 import SevenDaysCard from './SevenDaysCard';
 import SearchBar from './SearchBar';
-import getLocation from '../utils/API';
+import GetLocation from '../utils/API';
+import EachDay from './EachDay';
+// import UserContext from '../utils/UserContext';
 
 const HomeWrapper = styled.div`
   text-align: center;
@@ -22,17 +27,23 @@ const DayWrapper = styled.div`
   justify-content: center;
 `;
 const Home = () => {
-  const [data, setData] = useState('jacksonville, Fl');
-  const [details, setDetails] = useState({});
-  const [sevenDays, setSevenDays] = useState([]);
-  const [locations, setLocations] = useState();
-  const [selectedDay, setSelectedDay] = useState(null);
-  const { city_name: cityName, state_code: stateCode } = details;
+  const defaults = {
+    icon: 'CLOUDY',
+    color: 'goldenrod',
+    size: 72,
+    animate: true
+  };
 
+  const [locations, setLocations] = useState();
+  const [user, setUser] = useState({
+    locations: '',
+    sevenDays: [],
+    oneDay: '',
+  });
+  const { sevenDays, oneDay } = user;
   const getData = () => {
-    getLocation(locations)
+    GetLocation(locations)
       .then((res) => {
-        console.log(res.data);
         const { lat } = res.data[0];
         const { lon } = res.data[0];
         const weatherApiKey = process.env.REACT_APP_WEATHER_KEY;
@@ -41,10 +52,10 @@ const Home = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-            setDetails(data);
-            setSelectedDay(null);
-            setSevenDays(data.data);
+            setUser({
+              oneDay: null,
+              sevenDays: data.data,
+            });
           })
           .catch((error) => console.log(error));
       })
@@ -53,29 +64,75 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
+  // const inputChange = (e) => {
+  //   const { locations, value } = e.target;
+  //   setUser({ ...user, [locations]: value });
+  // };
   return (
     <HomeWrapper>
+      {/* <UserContext.Provider value={user}> */}
       <SearchBar
         getData={getData}
+          // inputChange={inputChange}
         locations={locations}
         setLocations={setLocations}
       />
-      <div className="cityName"> {cityName} {stateCode}</div>
-      <DayWrapper>
-        {sevenDays?.map((dayy) => (
-          <div>
-            <SevenDaysCard
-              dayy={dayy}
-              key={dayy.moonrise_ts}
-              high={dayy.high_temp}
-              isSelected={dayy === selectedDay}
-              selectedDay={() => setSelectedDay({ selectedDay: dayy })}
-            />
-          </div>
+      {/* </UserContext.Provider> */}
+      {/* <ReactAnimatedWeather
+        icon={defaults.icon}
+        color={defaults.color}
+        size={defaults.size}
+        animate={defaults.animate}
+      /> */}
+      <DayWrapper style={{ display: !oneDay ? 'flex' : 'none' }}>
+        {sevenDays?.map((dayy, i) => (
+          <SevenDaysCard
+            key={dayy.ts}
+            dayy={dayy}
+            temp={dayy.temp}
+            high={dayy.high_temp}
+            low={dayy.low_temp}
+            precip={dayy.precip}
+            date={moment(dayy.valid_date).format('dddd')}
+            selectDay={() => setUser({ ...user, oneDay: dayy })}
+          />
         ))}
       </DayWrapper>
+      <div>
+        {oneDay && (
+          <>
+            <EachDay
+              temp={oneDay.temp}
+              lowTemp={oneDay.low_temp}
+              highTemp={oneDay.high_temp}
+              feelhighTemp={oneDay.app_min_temp}
+              feellowTemp={oneDay.app_max_temp}
+              date={moment(oneDay.valid_date).format('dddd, MMM Do, YYYY:')}
+              img={oneDay.weather.icon}
+              description={oneDay.weather.description}
+              precip={oneDay.precip}
+              relativeHumidity={oneDay.rh}
+              windSpeed={oneDay.wind_spd}
+              windDirection={oneDay.wind_cdir_full}
+            />
+          </>
+        ) }
+      </div>
     </HomeWrapper>
   );
+};
+ReactAnimatedWeather.defaultProps = {
+  animate: true,
+  size: 64,
+  color: 'black'
+};
+ReactAnimatedWeather.propTypes = {
+  icon: PropTypes.oneOf([
+    'CLOUDY',
+  ]).isRequired,
+  animate: PropTypes.bool,
+  size: PropTypes.number,
+  color: PropTypes.string
 };
 
 export default Home;

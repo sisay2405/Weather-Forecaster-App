@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import ThemeContext from '../utils/ThemeContext';
 
 const SearchBarWrapper = styled.header`
   display:block;
   justify-content: space-between;
   margin-top:10px;
   .searchLocation {
-    color: #00b5e2;
+    text-align: center;
+    color: orange;
+    display: flex;
+  }
+  .searchLocationTitle{
+    text-align: center;
+    display: flex;
+    font-size:25px;
   }
   h3 {
     font-family: cursive;
@@ -19,42 +28,62 @@ const SearchBarWrapper = styled.header`
   input:hover {
     border-color: red;
   }
+  button:disabled{
+    background: #00BFFF;  //DeepSkyBlue
+    color:white;
+    margin: 8px 0;
+  }
+  button:enabled {
+    color:white;
+    background: #8FBC8F; //DarkSeaGreen
+    padding-top: 10px;
+    margin: 8px 0;
+  }
   button {
     border-radius: 25px;
   }
 `;
 
-const SearchBar = ({ getData, locations, setLocations }) => {
+const SearchBar = ({ getData, setLocations, locations }) => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const onSubmit = (e) => {
     e.preventDefault();
     getData();
   };
   return (
-    <SearchBarWrapper>
-      <form autoComplete="off" onSubmit={onSubmit}>
+    <SearchBarWrapper className={`content ${theme === 'seven-days-Weather' ? 'content--seven-days-Weather-mode' : ''}`}>
+      <form autoComplete="on" onSubmit={onSubmit}>
         <label htmlFor="header-search">
-          <h3>
-            {' '}
-            Weather Info For{' '}
-            <spam className="searchLocation">{locations}</spam>
-          </h3>
+          <div className="searchLocationTitle" style={{ marginLeft: '29.5rem' }}>
+            Weather Info For
+            <div className="searchLocation" style={{ marginLeft: '.5rem' }}> {locations}
+            </div>
+          </div>
         </label>
         <div className="WeatherSerach">
           <input
             className="searchHotelinput"
             type="text"
             autoComplete="true"
-            required
-            placeholder="Atlantic blvd or 32219 or Jacksonville Fl."
-            value={locations}
+            placeholder="Atlantic 32219 or Jacksonville Fl."
+            // value={locations}
+            // value={/* Something */}.
             onChange={(e) => setLocations(e.target.value)}
           />
-          <button className="searchHotelButton" type="submit">
+          <button
+            className="searchHotelButton"
+            type="submit"
+            disabled={!locations}
+            onClick={toggleTheme}
+          >
             Search
           </button>
         </div>
       </form>
     </SearchBarWrapper>
   );
+};
+SearchBar.propTypes = {
+  getData: PropTypes.func.isRequired,
 };
 export default SearchBar;

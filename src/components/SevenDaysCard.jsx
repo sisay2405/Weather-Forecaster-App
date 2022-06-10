@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
+import { Col } from 'reactstrap';
 import styled from 'styled-components';
-import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { lighten } from '../utils/StyleMethods';
 
-const EachDayWrapper = styled.div`
+const WeatherInfo = styled.div`
   margin: 12px 5px;
   border: 2px solid gray; 
-  padding: 17px;
+  border-top-right-radius: 70px;
+  border-bottom-left-radius: 70px;
+  // padding: 10px;
+  padding: 1.25rem .75rem;
+  :hover {
+    ${lighten('#00B5E2', 0.8)}
+    cursor: pointer;
+    border-color: #00B5E2;
+    }
+  .temp{
+    font-weight: 900;
+  }
+  img {
+      width: 70px;
+  }
   .ValidDate {
     color: #00b5e2;
   }
@@ -14,38 +29,29 @@ const EachDayWrapper = styled.div`
     font-weight: 700;
   }
 `;
-function SevenDaysCard({ dayy }) {
-  // console.log(dayy);
-  const navigate = useNavigate();
-  const displayHotel = (e) => {
-    navigate(`/EachDay/${dayy.id}`);
-  };
+function SevenDaysCard({ selectDay, dayy, date, temp, high, low, precip }) {
   return (
-    <EachDayWrapper onClick={displayHotel}>
-      <div className="ValidDate">
-        <strong>{moment(dayy.valid_date).format('dddd DD MMMM')}</strong>
+    <Col>
+      <div className="WeatherInfo">
+        <WeatherInfo onClick={selectDay}>
+          <section>
+            <div className="ValidDate"><strong>{date}</strong></div>
+            <img src={`https://www.weatherbit.io/static/img/icons/${dayy.weather.icon}.png`} alt={temp.toFixed(1)} />
+            <p className="temp"><strong>{temp}<sup>o</sup></strong></p>
+            <p><strong>High</strong>:{high.toFixed(1)}</p>
+            <p><strong>Low</strong>:{low.toFixed(1)}</p>
+            <p><strong>Precip</strong>:{precip}%</p>
+          </section>
+        </WeatherInfo>
       </div>
-      <p>
-        <strong>
-          {dayy.temp}
-          <sup>o</sup>
-        </strong>
-      </p>
-      <img src={`https://www.weatherbit.io/static/img/icons/${dayy.weather.icon}.png`} alt="https://www.weatherbit.io/static/img/icons/r01d.png" />
-      {/* <p>
-        {' '}
-        <strong>Description</strong>:{dayy.weather.description}
-      </p> */}
-      <p>
-        <strong>High</strong>:{dayy.high_temp}
-      </p>
-      <p>
-        <strong>Low</strong>:{dayy.low_temp}
-      </p>
-      <p>
-        <strong>precip</strong>:{dayy.precip}%
-      </p>
-    </EachDayWrapper>
+    </Col>
   );
 }
+SevenDaysCard.propTypes = {
+  date: PropTypes.string.isRequired,
+  temp: PropTypes.number.isRequired,
+  high: PropTypes.number.isRequired,
+  low: PropTypes.number.isRequired,
+  precip: PropTypes.number.isRequired,
+};
 export default SevenDaysCard;
