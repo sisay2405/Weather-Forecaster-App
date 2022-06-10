@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyle from '../globalStyle';
 import Header from '../components/Header';
-import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
 
 const Wrapper = styled.div`

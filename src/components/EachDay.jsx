@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import styled from 'styled-components';
-// import HomeIcon from '@mui/icons-material/Home';
 
 const EachDayWrapper = styled.header`
   margin: auto;

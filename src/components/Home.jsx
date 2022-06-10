@@ -35,8 +35,9 @@ const Home = () => {
         console.log(res.data);
         const { lat } = res.data[0];
         const { lon } = res.data[0];
+        const weatherApiKey = process.env.REACT_APP_WEATHER_KEY;
         fetch(
-          `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&units=I&days=7&key=455326207f5d4f89886b9b4ce1c94a08`
+          `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&units=I&days=7&key=${weatherApiKey}`
         )
           .then((res) => res.json())
           .then((data) => {
