@@ -1,4 +1,4 @@
-/* @keyframes fall{
+@keyframes fall{
     0%{
         top:0%;
     }
@@ -37,6 +37,7 @@
 .coffee .coffee6{
     left:60%; 
     animation:fall 7s linear infinite ; 
+    position:absolute ;
 
 }
 .coffee .coffee7{
@@ -56,4 +57,4 @@
     animation:fall 5s linear infinite ; 
     position:absolute ;
 
-}   */
+}  
