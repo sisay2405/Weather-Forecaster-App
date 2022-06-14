@@ -7,7 +7,6 @@ import SevenDaysCard from './SevenDaysCard';
 import SearchBar from './SearchBar';
 import GetLocation from '../utils/API';
 import EachDay from './EachDay';
-// import UserContext from '../utils/UserContext';
 
 const HomeWrapper = styled.div`
   text-align: center;
@@ -35,12 +34,18 @@ const Home = () => {
   };
 
   const [locations, setLocations] = useState();
+  const [details, setDetails] = useState({});
   const [user, setUser] = useState({
     locations: '',
     sevenDays: [],
     oneDay: '',
   });
   const { sevenDays, oneDay } = user;
+  const { city_name: cityName, state_code: stateCode } = details;
+
+  const backtohome = () => {
+    setUser({ ...user, oneDay: '' });
+  };
   const getData = () => {
     GetLocation(locations)
       .then((res) => {
@@ -56,6 +61,7 @@ const Home = () => {
               oneDay: null,
               sevenDays: data.data,
             });
+            setDetails(data);
           })
           .catch((error) => console.log(error));
       })
@@ -64,26 +70,21 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
-  // const inputChange = (e) => {
-  //   const { locations, value } = e.target;
-  //   setUser({ ...user, [locations]: value });
-  // };
+
   return (
     <HomeWrapper>
-      {/* <UserContext.Provider value={user}> */}
       <SearchBar
         getData={getData}
-          // inputChange={inputChange}
         locations={locations}
         setLocations={setLocations}
       />
-      {/* </UserContext.Provider> */}
-      {/* <ReactAnimatedWeather
+      <div className="cityName"> {cityName} {stateCode}</div>
+      <ReactAnimatedWeather
         icon={defaults.icon}
         color={defaults.color}
         size={defaults.size}
         animate={defaults.animate}
-      /> */}
+      />
       <DayWrapper style={{ display: !oneDay ? 'flex' : 'none' }}>
         {sevenDays?.map((dayy, i) => (
           <SevenDaysCard
@@ -114,6 +115,7 @@ const Home = () => {
               relativeHumidity={oneDay.rh}
               windSpeed={oneDay.wind_spd}
               windDirection={oneDay.wind_cdir_full}
+              backtohome={backtohome}
             />
           </>
         ) }
@@ -121,18 +123,19 @@ const Home = () => {
     </HomeWrapper>
   );
 };
-ReactAnimatedWeather.defaultProps = {
-  animate: true,
-  size: 64,
-  color: 'black'
-};
-ReactAnimatedWeather.propTypes = {
-  icon: PropTypes.oneOf([
-    'CLOUDY',
-  ]).isRequired,
-  animate: PropTypes.bool,
-  size: PropTypes.number,
-  color: PropTypes.string
-};
+
+// ReactAnimatedWeather.defaultProps = {
+//   animate: true,
+//   size: 64,
+//   color: 'black'
+// };
+// ReactAnimatedWeather.propTypes = {
+//   icon: PropTypes.oneOf([
+//     'CLOUDY',
+//   ]).isRequired,
+//   animate: PropTypes.bool,
+//   size: PropTypes.number,
+//   color: PropTypes.string
+// };
 
 export default Home;

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import ThemeContext from '../utils/ThemeContext';
 
 const SearchBarWrapper = styled.header`
@@ -53,21 +53,17 @@ const SearchBar = ({ getData, setLocations, locations }) => {
   return (
     <SearchBarWrapper className={`content ${theme === 'seven-days-Weather' ? 'content--seven-days-Weather-mode' : ''}`}>
       <form autoComplete="on" onSubmit={onSubmit}>
-        <label htmlFor="header-search">
-          <div className="searchLocationTitle" style={{ marginLeft: '29.5rem' }}>
-            Weather Info For
-            <div className="searchLocation" style={{ marginLeft: '.5rem' }}> {locations}
-            </div>
-          </div>
-        </label>
         <div className="WeatherSerach">
+          <label htmlFor="header-search" className="searchLocationTitle" style={{ marginLeft: '29.5rem' }}>
+            Weather Info For
+            <div className="searchLocation" style={{ marginLeft: '.5rem' }}>  {locations} </div>
+          </label>
           <input
             className="searchHotelinput"
             type="text"
+            id="header-search"
             autoComplete="true"
             placeholder="Atlantic 32219 or Jacksonville Fl."
-            // value={locations}
-            // value={/* Something */}.
             onChange={(e) => setLocations(e.target.value)}
           />
           <button
@@ -83,7 +79,7 @@ const SearchBar = ({ getData, setLocations, locations }) => {
     </SearchBarWrapper>
   );
 };
-SearchBar.propTypes = {
-  getData: PropTypes.func.isRequired,
-};
+// SearchBar.propTypes = {
+//   getData: PropTypes.func.isRequired,
+// };
 export default SearchBar;
