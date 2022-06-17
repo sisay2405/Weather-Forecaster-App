@@ -3,7 +3,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
-import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ThemeContext from '../utils/ThemeContext';
 
@@ -26,7 +25,6 @@ const Layout = () => {
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <GlobalStyle />
         <Wrapper>
-          <Header />
           <Outlet />
           <Footer />
         </Wrapper>

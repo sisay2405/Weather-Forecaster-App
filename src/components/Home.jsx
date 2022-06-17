@@ -9,30 +9,23 @@ import SearchBar from './SearchBar';
 import GetLocation from '../utils/API';
 import EachDay from './EachDay';
 import UserContext from '../utils/UserContext';
+import Header from './Header';
 
 const HomeWrapper = styled.div`
   text-align: center;
-  .daysList {
-  }
-  .EachDayView {
-    margin-top: 200px;
-  }
   .cityName1 {
-    padding-top:10px;
-    width:960px;
     color:orange;
-    display: flex;
-    justify-content: center;
+    font-size: 30px;
   }
 `;
 
 const DayWrapper = styled.div`
-  display:flex;
   justify-content: center;
+  flex-wrap: wrap;
 `;
 const Home = () => {
   const [locations, setLocations] = useState(null);
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState('');
   const [user, setUser] = useState({
     sevenDays: [],
     oneDay: '',
@@ -76,14 +69,16 @@ const Home = () => {
   return (
     <HomeWrapper>
       <UserContext.Provider value={{ getData, backtohome, sevenDays, oneDay }}>
+        <Header
+          locations={locations}
+        />
         <SearchBar
           locations={locations}
           setLocations={setLocations}
         />
         <div className="cityName1">
-          <div> {cityName} {stateCode}</div>
+          <strong>{cityName} {stateCode}</strong>
           <ReactAnimatedWeather
-            // className="cityName2"
             icon={defaults.icon}
             color={defaults.color}
             size={defaults.size}

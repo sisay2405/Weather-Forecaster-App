@@ -1,20 +1,42 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import UserContext from '../utils/UserContext';
 
 const EachDayWrapper = styled.header`
+// margin:0;
 .image11{
     height: 30px;
     width: 10px;
   }
   .EachDayTitle{
     text-align: center;
-    width: 1000px;
     color:orange;
     display: flex;
     margin-bottom: 1px;
     justify-content: center;
+  }
+  .refershIcon{
+    color: blue;
+    margin:0;
+  }
+  .EachDayDetail {
+    align-items: flex-start;
+    background: #00B5E2;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    display: flex;
+    flex-direction: row;
+    margin: 2rem auto;
+    margin-top: .1rem;
+    width: 475px;
+    img {
+      margin-right: 1rem;
+    }
+    h1 {
+      font-weight: 700;
+    }
   }
 `;
 const SpinnerLoader = styled.div`
@@ -68,10 +90,9 @@ const EachDay = ({ date, temp, lowTemp, img,
       ) : (
         <EachDayWrapper>{(!homepage) ? (
           <div>
-            <div className="EachDayTitle"> <RefreshIcon onClick={() => { backtohome(); }} />
-              <h3>Forcast Details for {date}</h3>
+            <div className="EachDayTitle"><h4>Forcast Details for {date}</h4>
             </div>
-            <section className="profile">
+            <section className="EachDayDetail">
               <section>
                 <img
                   src={`https://www.weatherbit.io/static/img/icons/${img}.png`}
@@ -100,6 +121,7 @@ const EachDay = ({ date, temp, lowTemp, img,
                 <p className="dayList">Wind Speed:{windSpeed}| <strong>Wind Direction:</strong>{windDirection}</p>
               </section>
             </section>
+            <h3 className="refershIcon"> <RefreshIcon onClick={() => { backtohome(); }} /></h3>
           </div>
         ) : ''}
         </EachDayWrapper>
