@@ -1,10 +1,10 @@
 import { createContext } from 'react';
 
 const UserContext = createContext({
-  details: {},
   sevenDays: [],
-  locations: '',
   oneDay: '',
+  getData: () => {},
+  backtohome: () => {},
 });
 
 export default UserContext;

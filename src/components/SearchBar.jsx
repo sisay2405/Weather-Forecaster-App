@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ThemeContext from '../utils/ThemeContext';
+import UserContext from '../utils/UserContext';
 
 const SearchBarWrapper = styled.header`
   display:block;
@@ -29,13 +30,13 @@ const SearchBarWrapper = styled.header`
     border-color: red;
   }
   button:disabled{
-    background: #00BFFF;  //DeepSkyBlue
+    background: Lightblue;  //DeepSkyBlue
     color:white;
     margin: 8px 0;
   }
   button:enabled {
     color:white;
-    background: #8FBC8F; //DarkSeaGreen
+    background-color: rgb(17, 178, 236);
     padding-top: 10px;
     margin: 8px 0;
   }
@@ -44,15 +45,17 @@ const SearchBarWrapper = styled.header`
   }
 `;
 
-const SearchBar = ({ getData, setLocations, locations }) => {
+const SearchBar = ({ setLocations, locations }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const onSubmit = (e) => {
+  const { getData } = useContext(UserContext);
+  const handelSubmit = (e) => {
     e.preventDefault();
+    setLocations('');
     getData();
   };
   return (
     <SearchBarWrapper className={`content ${theme === 'seven-days-Weather' ? 'content--seven-days-Weather-mode' : ''}`}>
-      <form autoComplete="on" onSubmit={onSubmit}>
+      <form autoComplete="on" onSubmit={handelSubmit}>
         <div className="WeatherSerach">
           <label htmlFor="header-search" className="searchLocationTitle" style={{ marginLeft: '29.5rem' }}>
             Weather Info For
@@ -62,7 +65,7 @@ const SearchBar = ({ getData, setLocations, locations }) => {
             className="searchHotelinput"
             type="text"
             id="header-search"
-            autoComplete="true"
+            value={locations == null ? '' : locations}
             placeholder="Atlantic 32219 or Jacksonville Fl."
             onChange={(e) => setLocations(e.target.value)}
           />

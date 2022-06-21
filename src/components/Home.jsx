@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -7,6 +8,7 @@ import SevenDaysCard from './SevenDaysCard';
 import SearchBar from './SearchBar';
 import GetLocation from '../utils/API';
 import EachDay from './EachDay';
+import UserContext from '../utils/UserContext';
 
 const HomeWrapper = styled.div`
   text-align: center;
@@ -15,9 +17,12 @@ const HomeWrapper = styled.div`
   .EachDayView {
     margin-top: 200px;
   }
-  .cityName{
-    color:orange;
+  .cityName1 {
     padding-top:10px;
+    width:960px;
+    color:orange;
+    display: flex;
+    justify-content: center;
   }
 `;
 
@@ -26,23 +31,20 @@ const DayWrapper = styled.div`
   justify-content: center;
 `;
 const Home = () => {
+  const [locations, setLocations] = useState(null);
+  const [details, setDetails] = useState({});
+  const [user, setUser] = useState({
+    sevenDays: [],
+    oneDay: '',
+  });
+  const { sevenDays, oneDay } = user;
+  const { city_name: cityName, state_code: stateCode } = details;
   const defaults = {
     icon: 'CLOUDY',
     color: 'goldenrod',
     size: 72,
     animate: true
   };
-
-  const [locations, setLocations] = useState();
-  const [details, setDetails] = useState({});
-  const [user, setUser] = useState({
-    locations: '',
-    sevenDays: [],
-    oneDay: '',
-  });
-  const { sevenDays, oneDay } = user;
-  const { city_name: cityName, state_code: stateCode } = details;
-
   const backtohome = () => {
     setUser({ ...user, oneDay: '' });
   };
@@ -73,34 +75,37 @@ const Home = () => {
 
   return (
     <HomeWrapper>
-      <SearchBar
-        getData={getData}
-        locations={locations}
-        setLocations={setLocations}
-      />
-      <div className="cityName"> {cityName} {stateCode}</div>
-      <ReactAnimatedWeather
-        icon={defaults.icon}
-        color={defaults.color}
-        size={defaults.size}
-        animate={defaults.animate}
-      />
-      <DayWrapper style={{ display: !oneDay ? 'flex' : 'none' }}>
-        {sevenDays?.map((dayy, i) => (
-          <SevenDaysCard
-            key={dayy.ts}
-            dayy={dayy}
-            temp={dayy.temp}
-            high={dayy.high_temp}
-            low={dayy.low_temp}
-            precip={dayy.precip}
-            date={moment(dayy.valid_date).format('dddd')}
-            selectDay={() => setUser({ ...user, oneDay: dayy })}
+      <UserContext.Provider value={{ getData, backtohome, sevenDays, oneDay }}>
+        <SearchBar
+          locations={locations}
+          setLocations={setLocations}
+        />
+        <div className="cityName1">
+          <div> {cityName} {stateCode}</div>
+          <ReactAnimatedWeather
+            // className="cityName2"
+            icon={defaults.icon}
+            color={defaults.color}
+            size={defaults.size}
+            animate={defaults.animate}
           />
-        ))}
-      </DayWrapper>
-      <div>
-        {oneDay && (
+        </div>
+        <DayWrapper style={{ display: !oneDay ? 'flex' : 'none' }}>
+          {sevenDays?.map((dayy, i) => (
+            <SevenDaysCard
+              key={dayy.ts}
+              dayy={dayy}
+              temp={dayy.temp}
+              high={dayy.high_temp}
+              low={dayy.low_temp}
+              precip={dayy.precip}
+              date={moment(dayy.valid_date).format('dddd')}
+              selectDay={() => setUser({ ...user, oneDay: dayy })}
+            />
+          ))}
+        </DayWrapper>
+        <div>
+          {oneDay && (
           <>
             <EachDay
               temp={oneDay.temp}
@@ -118,24 +123,23 @@ const Home = () => {
               backtohome={backtohome}
             />
           </>
-        ) }
-      </div>
+          ) }
+        </div>
+      </UserContext.Provider>
     </HomeWrapper>
   );
 };
 
-// ReactAnimatedWeather.defaultProps = {
-//   animate: true,
-//   size: 64,
-//   color: 'black'
-// };
-// ReactAnimatedWeather.propTypes = {
-//   icon: PropTypes.oneOf([
-//     'CLOUDY',
-//   ]).isRequired,
-//   animate: PropTypes.bool,
-//   size: PropTypes.number,
-//   color: PropTypes.string
-// };
+ReactAnimatedWeather.defaultProps = {
+  animate: true,
+};
+ReactAnimatedWeather.propTypes = {
+  icon: PropTypes.oneOf([
+    'CLOUDY', 'CLO'
+  ]).isRequired,
+  animate: PropTypes.bool,
+  size: PropTypes.number,
+  color: PropTypes.string
+};
 
 export default Home;
