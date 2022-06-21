@@ -1,6 +1,4 @@
-# my Api source https://www.weatherbit.io/api/weather-forecast-16-day
-
-### https://www.figma.com/proto/WxAfXVgRKDtYACdpI3L0HM/Untitled?node-id=3%3A39&scaling=min-zoom&page-id=0%3A1\
+### ![Figma](https://user-images.githubusercontent.com/82465149/171688172-a95ef2bb-d6bc-4555-8ff0-ab8ade73fa4b.png)
 
 ### https://trello.com/b/Rl4VFwzy/weather-app
 
