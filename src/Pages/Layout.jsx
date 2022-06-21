@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import GlobalStyle from '../GlobalStyle';
+import GlobalStyle from '../globalStyle';
 import Footer from '../Components/Footer';
 import ThemeContext from '../utils/ThemeContext';
 
