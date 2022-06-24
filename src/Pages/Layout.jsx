@@ -1,34 +1,28 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import GlobalStyle from '../globalStyle';
 import Footer from '../Components/Footer';
-import ThemeContext from '../utils/ThemeContext';
 
 const Wrapper = styled.div`
 `;
 
 const Layout = () => {
-  const [theme, setTheme] = useState('weather');
+  const theme = useSelector((state) => state.theme.value);
   useEffect(() => {
     document.title = `${
       theme[0].toUpperCase() + theme.slice(1)
     } App`;
   });
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'weather' ? 'seven-days-Weather' : 'weather'));
-  };
 
   return (
     <>
-      <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <GlobalStyle />
-        <Wrapper>
-          <Outlet />
-          <Footer />
-        </Wrapper>
-      </ThemeContext.Provider>
+      <GlobalStyle />
+      <Wrapper>
+        <Outlet />
+        <Footer />
+      </Wrapper>
     </>
   );
 };

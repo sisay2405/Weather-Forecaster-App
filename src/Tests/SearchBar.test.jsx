@@ -20,11 +20,11 @@ test('should the input has a place holder Atlantic 32219 or Jacksonville Fl', ()
   expect(placeHolder).toBeInTheDocument();
 });
 
-test('includes an input fields and a submit button with text "Search"', () => {
-  render(<SearchBar />);
-  const inputfield = screen.getByLabelText('Weather Info For');
-  expect(inputfield).toBeInTheDocument();
-});
+// test('includes an input fields and a submit button with text "Search"', () => {
+//   render(<SearchBar />);
+//   const inputfield = screen.getByLabelText('Weather Info For');
+//   expect(inputfield).toBeInTheDocument();
+// });
 test('button has correct color before and after click', () => {
   render(<SearchBar />);
   const colorButton = screen.getByRole('button', 'search');

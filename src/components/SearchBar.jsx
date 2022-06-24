@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
+// import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
-// import PropTypes from 'prop-types';
-import ThemeContext from '../utils/ThemeContext';
-import UserContext from '../utils/UserContext';
+import PropTypes from 'prop-types';
+import { toggleTheme } from '../store/themeSlice';
 
 const SearchBarWrapper = styled.header`
   .searchLocationTitle {
@@ -33,14 +34,15 @@ const SearchBarWrapper = styled.header`
   button {
     border-radius: 25px;
     cursor: pointer;
+    margin-top:0.5rem;
     padding: 0.5rem 2rem;
     width: 150px;
   }
 `;
 
-const SearchBar = ({ setLocations, locations }) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const { getData } = useContext(UserContext);
+const SearchBar = ({ setLocations, locations, getData }) => {
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.value);
   const handelSubmit = (e) => {
     e.preventDefault();
     setLocations('');
@@ -61,7 +63,7 @@ const SearchBar = ({ setLocations, locations }) => {
         <button
           type="submit"
           disabled={!locations}
-          onClick={toggleTheme}
+          onClick={() => dispatch(toggleTheme())}
         >
           Search
         </button>
@@ -69,7 +71,7 @@ const SearchBar = ({ setLocations, locations }) => {
     </SearchBarWrapper>
   );
 };
-// SearchBar.propTypes = {
-//   getData: PropTypes.func.isRequired,
-// };
+SearchBar.propTypes = {
+  getData: PropTypes.func.isRequired,
+};
 export default SearchBar;

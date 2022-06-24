@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -8,7 +7,6 @@ import SevenDaysCard from './SevenDaysCard';
 import SearchBar from './SearchBar';
 import GetLocation from '../utils/API';
 import EachDay from './EachDay';
-import UserContext from '../utils/UserContext';
 import Header from './Header';
 
 const HomeWrapper = styled.div`
@@ -68,39 +66,39 @@ const Home = () => {
 
   return (
     <HomeWrapper>
-      <UserContext.Provider value={{ getData, backtohome, sevenDays, oneDay }}>
-        <Header
-          locations={locations}
+      <Header
+        locations={locations}
+      />
+      <SearchBar
+        locations={locations}
+        setLocations={setLocations}
+        getData={getData}
+      />
+      <div className="cityName1">
+        <strong>{cityName} {stateCode}</strong>
+        <ReactAnimatedWeather
+          icon={defaults.icon}
+          color={defaults.color}
+          size={defaults.size}
+          animate={defaults.animate}
         />
-        <SearchBar
-          locations={locations}
-          setLocations={setLocations}
-        />
-        <div className="cityName1">
-          <strong>{cityName} {stateCode}</strong>
-          <ReactAnimatedWeather
-            icon={defaults.icon}
-            color={defaults.color}
-            size={defaults.size}
-            animate={defaults.animate}
+      </div>
+      <DayWrapper style={{ display: !oneDay ? 'flex' : 'none' }}>
+        {sevenDays?.map((dayy, i) => (
+          <SevenDaysCard
+            key={dayy.ts}
+            dayy={dayy}
+            temp={dayy.temp}
+            high={dayy.high_temp}
+            low={dayy.low_temp}
+            precip={dayy.precip}
+            date={moment(dayy.valid_date).format('dddd')}
+            selectDay={() => setUser({ ...user, oneDay: dayy })}
           />
-        </div>
-        <DayWrapper style={{ display: !oneDay ? 'flex' : 'none' }}>
-          {sevenDays?.map((dayy, i) => (
-            <SevenDaysCard
-              key={dayy.ts}
-              dayy={dayy}
-              temp={dayy.temp}
-              high={dayy.high_temp}
-              low={dayy.low_temp}
-              precip={dayy.precip}
-              date={moment(dayy.valid_date).format('dddd')}
-              selectDay={() => setUser({ ...user, oneDay: dayy })}
-            />
-          ))}
-        </DayWrapper>
-        <div>
-          {oneDay && (
+        ))}
+      </DayWrapper>
+      <div>
+        {oneDay && (
           <>
             <EachDay
               temp={oneDay.temp}
@@ -118,9 +116,8 @@ const Home = () => {
               backtohome={backtohome}
             />
           </>
-          ) }
-        </div>
-      </UserContext.Provider>
+        ) }
+      </div>
     </HomeWrapper>
   );
 };
