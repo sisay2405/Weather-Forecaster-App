@@ -1,15 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import UserContext from '../utils/UserContext';
+import mainLogo from '../Img/row8.png';
 
 const EachDayWrapper = styled.header`
-// margin:0;
-.image11{
-    height: 30px;
-    width: 10px;
-  }
   .EachDayTitle{
     text-align: center;
     color:orange;
@@ -69,24 +64,34 @@ const SpinnerLoader = styled.div`
 
 const EachDay = ({ date, temp, lowTemp, img,
   description, highTemp, feelhighTemp,
-  feellowTemp, precip, relativeHumidity, windSpeed, windDirection }) => {
+  feellowTemp, precip, relativeHumidity, windSpeed, windDirection, backtohome }) => {
   const [homepage, setHomepage] = useState(true);
   const [loading, setLoading] = useState(true);
-  const { backtohome } = useContext(UserContext);
   useEffect(() => {
     setLoading(true);
     setHomepage(false);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 3000);
   }, []);
 
   return (
     <>
       {loading ? (
-        <SpinnerLoader>
-          <div className="spin"> </div>
-        </SpinnerLoader>
+      // <SpinnerLoader>
+      //   <div className="spin"> </div>
+      // </SpinnerLoader>
+        <div className="coffee">
+          <div className="coffee1"> <img className="image11" src={mainLogo} alt="##" /></div>
+          <div className="coffee2"> <img className="image11" src={mainLogo} alt="##" /></div>
+          <div className="coffee3"> <img className="image11" src={mainLogo} alt="##" /></div>
+          <div className="coffee4"> <img className="image11" src={mainLogo} alt="##" /></div>
+          <div className="coffee5"> <img className="image11" src={mainLogo} alt="##" /></div>
+          <div className="coffee6"> <img className="image11" src={mainLogo} alt="##" /></div>
+          <div className="coffee7"> <img className="image11" src={mainLogo} alt="##" /></div>
+          <div className="coffee8"> <img className="image11" src={mainLogo} alt="##" /></div>
+          <div className="coffee9"> <img className="image11" src={mainLogo} alt="##" /></div>
+        </div>
       ) : (
         <EachDayWrapper>{(!homepage) ? (
           <div>

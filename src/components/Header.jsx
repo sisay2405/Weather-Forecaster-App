@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import ThemeContext from '../utils/ThemeContext';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Header = ({ locations }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useSelector((state) => state.theme.value);
   return (
     <header className={`header ${theme === 'seven-days-Weather' ? 'header--seven-days-Weather-mode' : ''}`}>
       <h1>

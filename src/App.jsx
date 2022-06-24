@@ -1,7 +1,5 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import { useMediaQuery } from 'react-responsive';
 import Layout from './Pages/Layout';
 import NotFound from './Pages/NotFound';
 import Home from './Components/Home';

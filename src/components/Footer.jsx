@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import ThemeContext from '../utils/ThemeContext';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useSelector((state) => state.theme.value);
   return (
     <footer className={`footer ${theme === 'seven-days-Weather' ? 'footer--seven-days-Weather-mode' : 'red'}`}>
       Sisay A - © {new Date().getFullYear()}

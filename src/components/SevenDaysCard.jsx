@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Col, Card, CardBody, Row } from 'reactstrap';
-import { lighten } from '../utils/StyleMethods';
+import { Col, Row } from 'reactstrap';
+import { lighten } from '../globalStyle';
 
 const WeatherInfo = styled.div`
   margin: 12px 5px;

@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
+// import {  } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -7,7 +8,6 @@ const GlobalStyle = createGlobalStyle`
     padding:0;
   }
   body {
-    // background-color: #fefefe;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
   }
@@ -43,6 +43,79 @@ const GlobalStyle = createGlobalStyle`
     color: dark;
   }
 }
+@keyframes fall{
+  0%{
+      left:0%;
+  }
+  100%{ 
+      left:110%; 
+  }
+}
+.coffee .coffee1{
+  left:10%; 
+  animation:fall 4s linear infinite ;
+  position:absolute ;
+}
+.coffee .coffee2{
+  left:20%; 
+  animation:fall 5s linear infinite ;
+  position:absolute ;
+}
+.coffee .coffee3{
+  left:30%; 
+  animation:fall 3s linear infinite ;
+  position:absolute ;
+
+}
+.coffee .coffee4{
+  left:40%; 
+  animation:fall 3s linear infinite ; 
+  position:absolute ;
+
+}
+.coffee .coffee5{
+  left:50%; 
+  animation:fall 6s linear infinite ; 
+  position:absolute ;
+
+}
+.coffee .coffee6{
+  left:60%; 
+  animation:fall 7s linear infinite ; 
+  position:absolute ;
+
+}
+.coffee .coffee7{
+  left:70%; 
+  animation:fall 8s linear infinite ; 
+  position:absolute ;
+
+}
+.coffee .coffee8{
+  left:80%; 
+  animation:fall 9s linear infinite ; 
+  position:absolute ;
+
+}
+.coffee .coffee9{
+  left:90%; 
+  animation:fall 10s linear infinite ; 
+  position:absolute ;
+
+}
+.image11{
+  width:10px;
+  hight: 10px;
+}
 `;
 
 export default GlobalStyle;
+
+export const lighten = (color, val) => css`
+  background-color: ${color};
+  background-image: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, ${val}) 0%,
+    rgba(255, 255, 255, ${val}) 100%
+  );
+`;
