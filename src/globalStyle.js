@@ -1,5 +1,4 @@
 import { createGlobalStyle, css } from 'styled-components';
-// import {  } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -12,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   .header {
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   text-align: center;
   background-color: rgb(17, 178, 236);
   &--seven-days-Weather-mode {
@@ -36,7 +35,6 @@ const GlobalStyle = createGlobalStyle`
   background-color: rgb(17, 178, 236);
   color: white;
   padding: 1.4rem 0;
-
   text-align: center;
   &--seven-days-Weather-mode {
     background-color:#3466bd;
@@ -55,35 +53,38 @@ const GlobalStyle = createGlobalStyle`
   left:10%; 
   animation:fall 4s linear infinite ;
   position:absolute ;
+  hight:10px;
 }
 .coffee .coffee2{
   left:20%; 
   animation:fall 5s linear infinite ;
   position:absolute ;
+  top:50%;
 }
 .coffee .coffee3{
   left:30%; 
   animation:fall 3s linear infinite ;
   position:absolute ;
-
+  top:80%;
 }
 .coffee .coffee4{
   left:40%; 
   animation:fall 3s linear infinite ; 
   position:absolute ;
-
+  top:50%;
 }
 .coffee .coffee5{
   left:50%; 
   animation:fall 6s linear infinite ; 
   position:absolute ;
+  top:90%;
 
 }
 .coffee .coffee6{
   left:60%; 
   animation:fall 7s linear infinite ; 
   position:absolute ;
-
+  top:70%;
 }
 .coffee .coffee7{
   left:70%; 
@@ -95,13 +96,13 @@ const GlobalStyle = createGlobalStyle`
   left:80%; 
   animation:fall 9s linear infinite ; 
   position:absolute ;
-
+  top:60%;
 }
 .coffee .coffee9{
   left:90%; 
   animation:fall 10s linear infinite ; 
   position:absolute ;
-
+  top:40%;
 }
 .image11{
   width:10px;

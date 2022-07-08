@@ -1,6 +1,5 @@
 import React from 'react';
-// import React, { useContext, useEffect, useState } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { toggleTheme } from '../store/themeSlice';
