@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import GlobalStyle from '../globalStyle';
-import Footer from '../Components/Footer';
 
 const Wrapper = styled.div`
 `;
@@ -21,7 +20,6 @@ const Layout = () => {
       <GlobalStyle />
       <Wrapper>
         <Outlet />
-        <Footer />
       </Wrapper>
     </>
   );

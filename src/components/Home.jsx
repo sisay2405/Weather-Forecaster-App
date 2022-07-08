@@ -8,6 +8,7 @@ import SearchBar from './SearchBar';
 import GetLocation from '../utils/API';
 import EachDay from './EachDay';
 import Header from './Header';
+import Footer from './Footer';
 
 const HomeWrapper = styled.div`
   text-align: center;
@@ -74,7 +75,7 @@ const Home = () => {
         setLocations={setLocations}
         getData={getData}
       />
-      <div className="cityName1">
+      <div className="cityName1" style={{ display: !oneDay ? 'block' : 'none' }}>
         <strong>{cityName} {stateCode}</strong>
         <ReactAnimatedWeather
           icon={defaults.icon}
@@ -117,6 +118,9 @@ const Home = () => {
             />
           </>
         ) }
+      </div>
+      <div style={{ display: !oneDay ? 'block' : 'none' }}>
+        <Footer />
       </div>
     </HomeWrapper>
   );

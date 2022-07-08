@@ -5,6 +5,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import mainLogo from '../Img/row8.png';
 
 const EachDayWrapper = styled.header`
+  margin-top:40px;
   .EachDayTitle{
     text-align: center;
     color:orange;
@@ -16,6 +17,15 @@ const EachDayWrapper = styled.header`
     color: blue;
     margin:0;
   }
+  .weatherList{
+    margin-top: 50px;
+  }
+  .dayList{
+    margin:1px;
+  }
+  .weatherImg{
+    padding:10px;
+  }
   .EachDayDetail {
     align-items: flex-start;
     background: #00B5E2;
@@ -25,7 +35,7 @@ const EachDayWrapper = styled.header`
     flex-direction: row;
     margin: 2rem auto;
     margin-top: .1rem;
-    width: 475px;
+    width: 400px;
     img {
       margin-right: 1rem;
     }
@@ -98,7 +108,7 @@ const EachDay = ({ date, temp, lowTemp, img,
             <div className="EachDayTitle"><h4>Forcast Details for {date}</h4>
             </div>
             <section className="EachDayDetail">
-              <section>
+              <section className="weatherImg">
                 <img
                   src={`https://www.weatherbit.io/static/img/icons/${img}.png`}
                   alt="highTemp"
@@ -109,8 +119,7 @@ const EachDay = ({ date, temp, lowTemp, img,
                 </h1>
                 <p className="dayList"><strong>{description}</strong></p>
               </section>
-
-              <section>
+              <section className="weatherList">
                 <p className="dayList">
                   <strong>High</strong>:
                   {highTemp}<sup>o</sup>|<strong>Feels like:</strong>{feelhighTemp}<sup>o</sup>
