@@ -31,44 +31,39 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### `npm run eject`
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+##Project Title: Weather Forcaster App
+ This app build with existing knowledge of the React basics (components, JSX, props, event handling, using forms, making API calls, basic hooks) and allow you to practice with React best practices like an ErrorBoundaries, PropTypes, ESLint (to enforce code style consistency), and writing component and unit tests.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project build in Bitwise React Byteme collaborate with Tyler(tdavis0828) and Javi(javiguerra777) Bytes  discuss strategy, debug issues, review code, etc. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+A demo of Weather Forecaster app, that initially loads WeatherBit forecast data for a hardcoded location (Jacksonville, Fl), and displays this information to the user via seven individual card components, one for each day of the week. The user can then click on an individual forecast day to view detailed forecast information, or choose instead to search for weather in a new location and uses the WeatherBit API,  geocoding API..  Demo-weather-app-detail.mp4
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+###Getting Started
+The App build out with simple wireframes using Figma. 
 
-## Learn More
+###Prerequisites / Installing
+The app has the following devDependencies installed: eslint eslint-config-airbnb eslint-config-node eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-node eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier and also contain .eslintignore, .eslintrc.json, and .prettierrc , Pull data from external APIs fetch.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ -- Each component's props should be destructured for component readibility.
+ -- By using search bar , the app should render weather forecast data for the new location.
+ -- set up to use ESLint with the Airbnb style guide and Prettier.
+A step by step series of examples that tell you how to get a development env running
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+###Running the tests
+Npm Test 
 
 ### Deployment
+netlify : https://sisay-weather-forecaster-app.netlify.app/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Authors
+Sisay Areaya Thompson - Initial work - PurpleBooth
+the list of contributors who participated in this project. All Byteme: Sarah Cullen(my lead Bitwise React ) , Tyler(tdavis0828), Javi(javiguerra777) and Frankie.
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
