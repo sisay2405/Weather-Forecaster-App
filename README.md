@@ -47,7 +47,7 @@ You may also see any lint errors in the console.
 This project build in Bitwise React Byteme collaborate with Tyler(tdavis0828) and Javi(javiguerra777) Bytes  discuss strategy, debug issues, review code, etc. 
 
 A demo of Weather Forecaster app, that initially loads WeatherBit forecast data for a hardcoded location (Jacksonville, Fl), and displays this information to the user via seven individual card components, one for each day of the week. The user can then click on an individual forecast day to view detailed forecast information, or choose instead to search for weather in a new location and uses the WeatherBit API,  geocoding API..  Demo-weather-app-detail.mp4
-
+https://user-images.githubusercontent.com/82465149/178811602-ab766af5-6090-41ce-814f-dc97dad78cd5.mp4
 ###Getting Started
 The App build out with simple wireframes using Figma. 
 
