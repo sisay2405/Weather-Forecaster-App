@@ -67,7 +67,7 @@ Npm Test
 netlify : https://sisay-weather-forecaster-app.netlify.app/
 https://user-images.githubusercontent.com/82465149/178811602-ab766af5-6090-41ce-814f-dc97dad78cd5.mp4
 ### Authors
-Sisay Areaya - Initial work - PurpleBooth
+Sisay Areaya - Initial work 
 the list of contributors who participated in this project. All Byteme: Sarah Cullen(my lead Bitwise React ) , Tyler(tdavis0828), Javi(javiguerra777) and Frankie.
 ### Support & Feedback
 If you are having technical issues or want to raise a bug/issue with the app, the preferred way is through GitHub issues. In order to contact with me for any other request please send an email to: sisayabreha04@gmail.com
