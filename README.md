@@ -70,7 +70,8 @@ netlify : https://sisay-weather-forecaster-app.netlify.app/
 Sisay Areaya Thompson - Initial work - PurpleBooth
 the list of contributors who participated in this project. All Byteme: Sarah Cullen(my lead Bitwise React ) , Tyler(tdavis0828), Javi(javiguerra777) and Frankie.
 ### Support & Feedback
-If you are having technical issues or want to raise a bug/issue with the app, the preferred way is through GitHub issues. In order to contact with me for any other request please send an email to: eneskeskinfk@gmail.com
+If you are having technical issues or want to raise a bug/issue with the app, the preferred way is through GitHub issues. In order to contact with me for any other request please send an email to: abrehasisay04k@gmail.com
 
 License
 Distributed under the MIT License. See LICENSE for more information.
+
