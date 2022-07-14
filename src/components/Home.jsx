@@ -29,7 +29,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const { locations, details } = useSelector(
     (state) => state.home,
-    // eslint-disable-next-line comma-dangle
     shallowEqual,
   );
   const [user, setUser] = useState({
