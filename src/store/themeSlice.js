@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 export const themeSlice = createSlice({
@@ -7,7 +8,6 @@ export const themeSlice = createSlice({
   },
   reducers: {
     toggleTheme(state, action) {
-      // eslint-disable-next-line no-param-reassign
       state.value = state.value === 'weather' ? 'seven-days-Weather' : 'weather';
     },
   },

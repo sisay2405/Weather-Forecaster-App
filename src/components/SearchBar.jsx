@@ -1,7 +1,9 @@
+/* eslint-disable react/jsx-curly-newline */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { setLocations } from '../store/homepageSlice';
 import { toggleTheme } from '../store/themeSlice';
 
 const SearchBarWrapper = styled.header`
@@ -22,33 +24,40 @@ const SearchBarWrapper = styled.header`
   input:hover {
     border-color: red;
   }
-  button:disabled{
-    background: Lightblue;  //DeepSkyBlue
-    color:white;
+  button:disabled {
+    background: Lightblue; //DeepSkyBlue
+    color: white;
   }
   button:enabled {
-    color:white;
+    color: white;
     background-color: rgb(17, 178, 236);
   }
   button {
     border-radius: 25px;
     cursor: pointer;
-    margin-top:0.5rem;
+    margin-top: 0.5rem;
     padding: 0.5rem 2rem;
     width: 150px;
   }
 `;
 
-const SearchBar = ({ setLocations, locations, getData }) => {
+const SearchBar = ({ getData }) => {
   const dispatch = useDispatch();
+  const locations = useSelector((state) => state.home.locations);
   const theme = useSelector((state) => state.theme.value);
   const handelSubmit = (e) => {
     e.preventDefault();
-    setLocations('');
+    dispatch(setLocations(''));
     getData();
   };
   return (
-    <SearchBarWrapper className={`content ${theme === 'seven-days-Weather' ? 'content--seven-days-Weather-mode' : ''}`}>
+    <SearchBarWrapper
+      className={`content ${
+        theme === 'seven-days-Weather'
+          ? 'content--seven-days-Weather-mode'
+          : ''
+      }`}
+    >
       <form onSubmit={handelSubmit}>
         <label htmlFor="header-search">
           <input
@@ -56,7 +65,7 @@ const SearchBar = ({ setLocations, locations, getData }) => {
             id="header-search"
             value={locations == null ? '' : locations}
             placeholder="Atlantic 32219 or Jacksonville Fl."
-            onChange={(e) => setLocations(e.target.value)}
+            onChange={(e) => dispatch(setLocations(e.target.value))}
           />
         </label>
         <button

@@ -53,7 +53,7 @@ const GlobalStyle = createGlobalStyle`
   left:10%; 
   animation:fall 4s linear infinite ;
   position:absolute ;
-  hight:10px;
+  top:50%;
 }
 .coffee .coffee2{
   left:20%; 
@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
   left:30%; 
   animation:fall 3s linear infinite ;
   position:absolute ;
-  top:80%;
+  top:50%;
 }
 .coffee .coffee4{
   left:40%; 
@@ -77,32 +77,32 @@ const GlobalStyle = createGlobalStyle`
   left:50%; 
   animation:fall 6s linear infinite ; 
   position:absolute ;
-  top:90%;
+  top:50%;
 
 }
 .coffee .coffee6{
   left:60%; 
   animation:fall 7s linear infinite ; 
   position:absolute ;
-  top:70%;
+  top:50%;
 }
 .coffee .coffee7{
   left:70%; 
   animation:fall 8s linear infinite ; 
   position:absolute ;
-
+  top:50%;
 }
 .coffee .coffee8{
   left:80%; 
   animation:fall 9s linear infinite ; 
   position:absolute ;
-  top:60%;
+  top:50%;
 }
 .coffee .coffee9{
   left:90%; 
   animation:fall 10s linear infinite ; 
   position:absolute ;
-  top:40%;
+  top:50%;
 }
 .image11{
   width:10px;
