@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import ThemeContext from '../utils/ThemeContext';
 import UserContext from '../utils/UserContext';
 
